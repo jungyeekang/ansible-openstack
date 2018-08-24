@@ -1,0 +1,14 @@
+---
+# tasks file for create-keypair
+  - name: create ssh_key
+    user:
+      name: "{{ ansible_env.USER }}"
+      generate_ssh_key: yes
+      ssh_key_file: .ssh/test_id_rsa
+
+  - name: create key-pair
+    os_keypair:
+      cloud: ospcloud
+      name: ansible_ssh
+      state: present
+      public_key_file: "{{ ansible_env.HOME }}/.ssh/test_id_rsa.pub"
